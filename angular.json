@@ -1,0 +1,137 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "gemini-chatbot-prototype": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/gemini-chatbot-prototype",
+      "sourceRoot": "projects/gemini-chatbot-prototype/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/gemini-chatbot-prototype",
+            "index": "projects/gemini-chatbot-prototype/src/index.html",
+            "browser": "projects/gemini-chatbot-prototype/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/gemini-chatbot-prototype/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/gemini-chatbot-prototype/src/favicon.ico",
+              "projects/gemini-chatbot-prototype/src/assets"
+            ],
+            "styles": [
+              "projects/gemini-chatbot-prototype/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "gemini-chatbot-prototype:build:production"
+            },
+            "development": {
+              "buildTarget": "gemini-chatbot-prototype:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "gemini-chatbot-prototype:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/gemini-chatbot-prototype/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "projects/gemini-chatbot-prototype/src/favicon.ico",
+              "projects/gemini-chatbot-prototype/src/assets"
+            ],
+            "styles": [
+              "projects/gemini-chatbot-prototype/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "gemini-chatbot": {
+      "projectType": "library",
+      "root": "projects/gemini-chatbot",
+      "sourceRoot": "projects/gemini-chatbot/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/gemini-chatbot/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/gemini-chatbot/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/gemini-chatbot/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/gemini-chatbot/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "0b54c9aa-02f0-40b5-9b3a-0251c825e513"
+  }
+}
